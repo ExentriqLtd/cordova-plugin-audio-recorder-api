@@ -15,10 +15,11 @@ import java.util.UUID;
 import java.io.FileInputStream;
 import java.io.File;
 import java.io.IOException;
+import com.emj365.plugins.WavAudioRecorder;
 
 public class AudioRecorderAPI extends CordovaPlugin {
 
-  private MediaRecorder myRecorder;
+  private WavAudioRecorder myRecorder;
   private String outputFile;
   private CountDownTimer countDowntimer;
 
@@ -33,14 +34,15 @@ public class AudioRecorderAPI extends CordovaPlugin {
     }
     if (action.equals("record")) {
       outputFile = context.getFilesDir().getAbsoluteFile() + "/"
-        + UUID.randomUUID().toString() + ".m4a";
-      myRecorder = new MediaRecorder();
-      myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-      myRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-      myRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-      myRecorder.setAudioSamplingRate(44100);
-      myRecorder.setAudioChannels(1);
-      myRecorder.setAudioEncodingBitRate(32000);
+        + UUID.randomUUID().toString() + ".wav";
+      myRecorder =  WavAudioRecorder.getInstance();
+//      myRecorder = new MediaRecorder();
+//      myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+//      myRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+//      myRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+//      myRecorder.setAudioSamplingRate(44100);
+//      myRecorder.setAudioEncodingBitRate(96000);
+//      myRecorder.setAudioChannels(1);
       myRecorder.setOutputFile(outputFile);
 
       try {
